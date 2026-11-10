@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loops and Conditionals - Take-Home Challenges</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #1e1e1e;
+      color: #d4d4d4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #569cd6;
+      text-align: center;
+    }
+    h2 {
+      color: #4ec9b0;
+      border-bottom: 1px solid #333;
+      padding-bottom: 6px;
+      margin-top: 40px;
+    }
+    pre {
+      background: #252526;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 16px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .note {
+      color: #ce9178;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Loops and Conditionals – Take-Home Challenges</h1>
+  <p class="note">Open the browser console (F12) to also see the output there. Results are shown below as well.</p>
+
+  <h2>Challenge 1: Chai and Mandazi Counter</h2>
+  <pre id="output1"></pre>
+
+  <h2>Challenge 2: Savings Challenge</h2>
+  <pre id="output2"></pre>
+
+  <h2>Challenge 3: Report Card Rescue</h2>
+  <pre id="output3"></pre>
+
+  <script>
+    // Helper to capture console.log into a string
+    function captureOutput(fn) {
+      let output = "";
+      const originalLog = console.log;
+      console.log = (...args) => {
+        output += args.join(" ") + "\n";
+        originalLog(...args); // still show in real console
+      };
+      fn();
+      console.log = originalLog;
+      return output;
+    }
+
+    // ========== CHALLENGE 1 ==========
+    document.getElementById("output1").textContent = captureOutput(() => {
+      // Count from 1 to 30 and shout Chai / Mandazi based on multiples
+      let chaiMandaziCount = 0;
+
+      for (let i = 1; i <= 30; i++) {
+        if (i % 3 === 0 && i % 5 === 0) {
+          console.log("Chai & Mandazi");
+          chaiMandaziCount++;
+        } else if (i % 3 === 0) {
+          console.log("Chai");
+        } else if (i % 5 === 0) {
+          console.log("Mandazi");
+        } else {
+          console.log(i);
+        }
+      }
+
+      // Bonus
+      console.log("Chai & Mandazi was shouted " + chaiMandaziCount + " times");
+    });
+
+    // ========== CHALLENGE 2 ==========
+    document.getElementById("output2").textContent = captureOutput(() => {
+      // Calculate how many months to save KES 5000
+      let goal = 5000;
+      let month = 1;
+      let saving = 100;
+      let total = 0;
+
+      while (total < goal) {
+        total += saving;
+
+        let line = Month ${month}: saved KES ${saving}, total KES ${total};
+        if (saving >= 500) {
+          line += " - Big month!";
+        }
+        console.log(line);
+
+        // Safety net (bonus)
+        if (month >= 24) {
+          console.log("Stopped at month 24 for safety");
+          break;
+        }
+
+        month++;
+        saving += 50;
+      }
+
+      console.log(Goal reached in month ${month - 1} with KES ${total}!);
+    });
+
+    // ========== CHALLENGE 3 ==========
+    document.getElementById("output3").textContent = captureOutput(() => {
+      // Grade the valid marks and summarise the class
+      let marks = [78, 45, -5, 92, 60, 101, 55, 38];
+
+      // Bonus: add 50 and 80
+      marks.push(50, 80);
+
+      let validCount = 0;
+      let passCount = 0;
+      let failCount = 0;
+      let totalMarks = 0;
+      let highest = -1;
+      let highestStudent = 0;
+      let lowest = 101;
+      let lowestStudent = 0;
+
+      for (let i = 0; i < marks.length; i++) {
+        let mark = marks[i];
+
+        // Skip invalid marks
+        if (mark < 0 || mark > 100) {
+          console.log(Student ${i + 1}: Invalid mark, skipped);
+          continue;
+        }
+…
